@@ -1,0 +1,50 @@
+﻿@using Orchard.ContentManagement
+@using Orchard.DisplayManagement.Shapes
+@using Orchard.InlineEditing
+@{
+    var html = ((IHtmlString)Model.Metadata.ChildContent).ToHtmlString();
+
+    Style.Require("InlineShape");
+    Script.Require("InlineEdit");
+    Script.Require("InlineEditor_DefaultEditor");
+
+    var metadata = ((Shape)Model).Metadata;
+    
+    Model.Classes.Add("widget-control");
+    Model.Classes.Add("shape");
+    
+    if (string.IsNullOrWhiteSpace(html)) {
+        Model.Classes.Add("nocontent");
+    }
+
+    Model.Attributes.Add("data-shape-id", Model.ContentItem.Id.ToString());
+    Model.Attributes.Add("data-shape-type", (string)Model.Metadata.Type);
+
+    var contentPart = Model.ContentPart as ContentPart;
+    var contentField = Model.ContentField as ContentField;
+    string editUrl = "";
+    
+    if (contentPart != null && contentField == null) {
+        editUrl = Url.GetEditShape((int)Model.ContentItem.Id, (string)Model.Metadata.Type);
+    }
+    else if (contentPart != null && contentField != null) {
+        Model.Attributes.Add("data-shape-name", (string)contentField.Name);
+        editUrl = Url.GetEditShape((int)Model.ContentItem.Id, (string)Model.Metadata.Type, (string)contentField.Name);
+        Model.Classes.Add("shape-" + (string) contentField.Name.ToLowerInvariant());
+    }
+    
+    var tag = Tag(Model, "div");
+}
+
+@tag.StartElement
+    <div class="shape-content">
+        <div class="manage-actions">
+            <a class="edit-shape" href="@editUrl"></a>
+        </div>
+        <div class="editable-content">
+            @Display(Model.Metadata.ChildContent)
+        </div>
+    </div>
+
+    <div class="shape-editor"></div>
+@tag.EndElement

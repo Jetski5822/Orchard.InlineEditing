@@ -1,0 +1,73 @@
+﻿.widget-control.shape {
+    border: none;
+	clear: both;
+}
+
+.widget-control.shape:hover {
+    background:  hsla(140, 13%, 46%, 0.2);
+}
+
+.widget-control.shape:hover .manage-actions a {
+    display: block;
+}
+
+.widget-control.shape .manage-actions a {
+    display: none;
+    width: 16px;
+    height: 16px;
+    padding: 0;
+    margin: 3px 3px 0 0;
+}
+
+.widget-control.shape .manage-actions a.edit-shape {
+    background: url('../content/edit.png') no-repeat;
+}
+
+.shape-editor-actions {
+    padding: 3px;   
+}
+
+.shape-editor-actions:after {
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+}
+
+.shape-editor-actions ul 
+{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    float: right;
+}
+
+.shape-editor-actions ul:after {
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+}
+
+.shape-editor-actions ul li
+{
+    float: left;
+    margin-left: 5px;
+}
+
+.shape-editor-actions ul li a
+{
+    font-weight: bold;
+}
+
+.shape-editor-wrapper {
+    border: 1px dashed #ccc;
+    padding: 5px;
+    background:  hsla(140, 13%, 46%, 0.2);
+}
+
+.text.large {
+    width: 90%;
+}
