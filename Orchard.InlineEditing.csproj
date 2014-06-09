@@ -67,13 +67,17 @@
     <Content Include="Content\info.png" />
     <Content Include="Content\locked.png" />
     <Content Include="Content\move.png" />
+    <None Include="placement.info" />
     <Content Include="Module.txt" />
+    <Content Include="Scripts\orchard-inlineedit-markdowneditor.js" />
+    <Content Include="Scripts\orchard-inlineedit-tinymceeditor.js" />
     <Content Include="Scripts\orchard-inlineedit.js" />
     <Content Include="Scripts\orchard-inlineedit-defaulteditor.js" />
     <Content Include="Scripts\orchard-inlineedit.ui.js" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ContentManagment\InlineContentDisplay.cs" />
+    <Compile Include="Extensions\HtmlHelperExtensions.cs" />
     <Compile Include="ViewModels\InlineViewModel.cs" />
     <Compile Include="Extensions\Constants.cs" />
     <Compile Include="Extensions\UrlHelperExtenstions.cs" />
@@ -128,11 +132,13 @@
   <ItemGroup>
     <Content Include="Views\ShapeEditorActions.cshtml" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Views\EditorTemplates\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="Views\ExternalShapes.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\EditorTemplates\Parts.Common.Body.InlineEdit.cshtml" />
+    <Content Include="Views\EditorTemplates\Parts.Title.InlineEdit.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

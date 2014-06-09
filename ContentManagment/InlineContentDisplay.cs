@@ -86,15 +86,17 @@ namespace Orchard.InlineEditing.ContentManagment {
 
         public dynamic UpdateEditor(IContent content, string metadataType, string modelType, string partTypeName, string fieldTypeName, IUpdateModel updateModel) {
             dynamic itemShape = CreateItemShape(metadataType);
+
+            itemShape.ContentItem = content.ContentItem;
+
+            var workContext = _workContextAccessor.GetContext(_requestContext.HttpContext);
+            
+            var theme = workContext.CurrentTheme;
+            var shapeTable = _shapeTableLocator.Value.Lookup(theme.Id);
+
+            var context = new UpdateEditorContext(itemShape, content, updateModel, string.Empty, _shapeFactory, shapeTable);
+
             if (string.Equals(modelType, "Part", StringComparison.OrdinalIgnoreCase)) {
-                itemShape.ContentItem = content.ContentItem;
-
-                var workContext = _workContextAccessor.GetContext(_requestContext.HttpContext);
-
-                var theme = workContext.CurrentTheme;
-                var shapeTable = _shapeTableLocator.Value.Lookup(theme.Id);
-
-                var context = new UpdateEditorContext(itemShape, content, updateModel, string.Empty, _shapeFactory, shapeTable);
                 var drivers = FindPartDrivers(partTypeName);
 
                 foreach (var driver in drivers) {
@@ -106,14 +108,6 @@ namespace Orchard.InlineEditing.ContentManagment {
                 }
             }
             if (string.Equals(modelType , "Field", StringComparison.OrdinalIgnoreCase)) {
-                itemShape.ContentItem = content.ContentItem;
-
-                var workContext = _workContextAccessor.GetContext(_requestContext.HttpContext);
-
-                var theme = workContext.CurrentTheme;
-                var shapeTable = _shapeTableLocator.Value.Lookup(theme.Id);
-
-                var context = new UpdateEditorContext(itemShape, content, updateModel, string.Empty, _shapeFactory, shapeTable);
                 var contentPart =  content.ContentItem.Parts.Single(o => o.GetType().Name == partTypeName);
                 var drivers = FindFieldDrivers(contentPart, fieldTypeName);
 

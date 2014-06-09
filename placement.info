@@ -1,0 +1,8 @@
+﻿<Placement>
+  <Match DisplayType="Detail">
+      <Place 
+             Parts_Title_InlineEdit="Inline:1" 
+             Parts_Common_Body_InlineEdit="Inline:1"
+      />
+  </Match>
+</Placement>
