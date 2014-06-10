@@ -14,6 +14,24 @@
         return false;
     });
 
+    /**
+     * @see http://stackoverflow.com/q/7616461/940217
+     * @return {number}
+     */
+    String.prototype.hashCode = function () {
+        if (Array.prototype.reduce) {
+            return this.split("").reduce(function (a, b) { a = ((a << 5) - a) + b.charCodeAt(0); return a & a }, 0);
+        }
+        var hash = 0;
+        if (this.length === 0) return hash;
+        for (var i = 0; i < this.length; i++) {
+            var character = this.charCodeAt(i);
+            hash = ((hash << 5) - hash) + character;
+            hash = hash & hash; // Convert to 32bit integer
+        }
+        return hash;
+    }
+
     var ui = {
         events: {
             initializingEditor: 'inlineedit.initializingEditor',
@@ -46,13 +64,25 @@
             $(data).find("script[type='text/javascript']").each(function (index) {
                 var sourceValue = $(this).attr('src');
 
-                var bodyScript = $("script[src='" + sourceValue + "']");
+                if (sourceValue != undefined && sourceValue.length >= 1) {
+                    var bodyScript = $("script[src='" + sourceValue + "']");
 
-                if (bodyScript.length == 0) {
-                    $('body').append(this);
+                    if (bodyScript.length == 0) {
+                        $('body').append(this);
+                    }
+
+                    data = $(data).clone().find("script[src='" + sourceValue + "']").remove().end();
+                } else {
+                    var hash = new String(this).hashCode();
+
+                    var bodyScript = $("script[data-hash='" + hash + "']");
+
+                    if (bodyScript.length == 0) {
+                        $('body').append($(this).attr("data-hash", hash));
+                    }
+
+                    data = $(data).clone().find("script[data-hash='" + hash + "']").remove().end();
                 }
-                
-                data = $(data).clone().find("script[src='" + sourceValue + "']").remove().end();
             });
 
             $(data).find("link[type='text/css']").each(function (index) {
