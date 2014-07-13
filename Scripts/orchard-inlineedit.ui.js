@@ -8,11 +8,25 @@
         var editUrl = $(this).attr("href");
 
         $.ajax({ cache: false, url: editUrl }).then(function (data) {
+
+            var metaDataType = $.urlParam(editUrl, "metadataType");
+
+            self.MetadataType = metaDataType;
             ui.initializeEditor(data, self);
         });
 
         return false;
     });
+
+    $.urlParam = function (url, name) {
+        var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(url);
+        if (results == null) {
+            return null;
+        }
+        else {
+            return results[1] || 0;
+        }
+    }
 
     /**
      * @see http://stackoverflow.com/q/7616461/940217

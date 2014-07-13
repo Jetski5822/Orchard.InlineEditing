@@ -1,6 +1,7 @@
 ﻿@using Orchard.ContentManagement
 @using Orchard.DisplayManagement.Shapes
 @using Orchard.InlineEditing
+@using Orchard.Utility.Extensions
 @{
     var html = ((IHtmlString)Model.Metadata.ChildContent).ToHtmlString();
 
@@ -46,5 +47,5 @@
         </div>
     </div>
 
-    <div class="shape-editor"></div>
+    <div class="shape-editor" id="@Guid.NewGuid().ToString().HtmlClassify()"></div>
 @tag.EndElement

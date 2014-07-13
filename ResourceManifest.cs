@@ -11,6 +11,8 @@ namespace Orchard.InlineEditing {
             manifest.DefineStyle("InlineShape").SetUrl("orchard-inlineshape.css");
 
             manifest.DefineScript("InlineEditor_DefaultEditor").SetUrl("orchard-inlineedit-defaulteditor.js").SetDependencies("InlineEdit");
+
+            manifest.DefineScript("InlineEditor_TinyMceEditor").SetUrl("orchard-inlineedit-tinymceeditor.JS").SetDependencies("TinyMce");
         }
     }
 }

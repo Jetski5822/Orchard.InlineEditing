@@ -3,6 +3,8 @@
 @using Orchard.InlineEditing
 @{
     var titlePart = (TitlePart)Model.DisplayShape.ContentPart;
+
+    Script.Require("InlineEditor_TinyMceEditor");
 }
 
 @using (Html.InlineEdit(this)) {
