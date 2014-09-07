@@ -2,6 +2,8 @@
 @using Orchard.Core.Title.Models
 @using Orchard.InlineEditing
 @{
+    Script.Require("InlineEditor_DefaultEditor");
+    
     var titlePart = (TitlePart)Model.DisplayShape.ContentPart;
 }
 

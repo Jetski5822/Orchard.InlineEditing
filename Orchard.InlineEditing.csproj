@@ -73,6 +73,7 @@
     <Content Include="Scripts\orchard-inlineedit.js" />
     <Content Include="Scripts\orchard-inlineedit-defaulteditor.js" />
     <Content Include="Scripts\orchard-inlineedit.ui.js" />
+    <Content Include="Views\Body-Html-TinyMce.Editor.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ContentManagment\InlineContentDisplay.cs" />

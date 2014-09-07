@@ -1,5 +1,4 @@
-﻿@using Orchard.ContentManagement
-@using Orchard.Environment.Descriptor.Models
+﻿@using Orchard.Environment.Descriptor.Models
 @using Orchard.InlineEditing
 @using Orchard.Core.Common.Models
 @using Orchard.Core.Common.Settings
@@ -12,25 +11,26 @@
     var flavor = (typePartSettings != null && !string.IsNullOrWhiteSpace(typePartSettings.Flavor))
                        ? typePartSettings.Flavor
                        : part.PartDefinition.Settings.GetModel<BodyPartSettings>().FlavorDefault;
+    
+    var shellDescriptor = WorkContext.Resolve<ShellDescriptor>();
 
-    BodyEditorViewModel viewModel = new BodyEditorViewModel {
+    var viewModel = new BodyEditorViewModel {
         BodyPart = part,
         EditorFlavor = flavor,
         AddMediaPath = "/"
     };
     
-    var shellDescriptor = WorkContext.Resolve<ShellDescriptor>();
-
     if (flavor == "html") {
         if (shellDescriptor.Features.Any(x => x.Name == "TinyMce")) {
-            Script.Require("TinyMce");
-            Script.Include("orchard-inlineedit-tinymceeditor.js");
+            viewModel.EditorFlavor = viewModel.EditorFlavor + "__tinymce";
         }
     }
     if (flavor == "markdown") {
         if (shellDescriptor.Features.Any(x => x.Name == "Markdown")) {
             Script.Require("OrchardMarkdown");
             Script.Include("orchard-inlineedit-markdowneditor.js");
+
+            viewModel.EditorFlavor = viewModel.EditorFlavor + "__markdown";
         }
     }
 }

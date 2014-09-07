@@ -1,0 +1,28 @@
+﻿@using Orchard.ContentManagement
+@using Orchard.Environment.Descriptor.Models
+@using Orchard.Localization
+
+@{
+    var shellDescriptor = WorkContext.Resolve<ShellDescriptor>();
+}
+
+<script type="text/javascript">
+    var mediaPickerEnabled = @(shellDescriptor.Features.Any(x => x.Name == "Orchard.MediaPicker") ? "true" : "false");
+    var mediaLibraryEnabled = @(shellDescriptor.Features.Any(x => x.Name == "Orchard.MediaLibrary") ? "true" : "false");
+    var directionality = '@Html.Directionality((IContent)Model.ContentItem)';
+</script>
+
+@{ 
+    Script.Require("TinyMce");
+    Script.Include("orchard-inlineedit-tinymceeditor.js");
+    Script.Require("jQueryColorBox");
+    Style.Require("jQueryColorBox");
+}
+
+@Html.TextArea("Text", (string)Model.Text, 25, 80,
+	 new Dictionary<string,object> {
+		{"class", "html tinymce"},
+		{"data-mediapicker-uploadpath",Model.AddMediaPath},
+		{"data-mediapicker-title",T("Insert/Update Media")},
+        {"style", "width:100%"}
+	 })
