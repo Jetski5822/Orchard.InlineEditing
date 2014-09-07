@@ -8,7 +8,9 @@
 
         if (tinymce != undefined) {
             console.log('Processing Content: TinyMce Editor triggering save');
-            tinymce.activeEditor.save();
+            var afterContent = tinymce.activeEditor.save();
+            $('#' + tinymce.activeEditor.id).parent('form').children('textarea').val(afterContent);
+
             console.log('Processing Content: TinyMce Editor triggering saved');
         }
 
@@ -33,7 +35,7 @@
         if (shapeEditor.MetadataType == 'Parts_Common_Body') {
             debugger;
 
-            var selector = '#' + shape.id + ' textarea.tinymce';
+            var selector = '#' + shape.id + ' div.tinymce';
 
             var editorShapeId = $(selector).attr('id');
             var newEditorShapeId = shape.id + '_' + editorShapeId;

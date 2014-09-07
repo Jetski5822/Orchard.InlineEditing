@@ -17,12 +17,15 @@
     Script.Include("orchard-inlineedit-tinymceeditor.js");
     Script.Require("jQueryColorBox");
     Style.Require("jQueryColorBox");
+
+    var body = new HtmlString(((string)Model.Text).Replace(Environment.NewLine, "</p>" + Environment.NewLine + "<p>")); 
 }
 
 @Html.TextArea("Text", (string)Model.Text, 25, 80,
-	 new Dictionary<string,object> {
-		{"class", "html tinymce"},
-		{"data-mediapicker-uploadpath",Model.AddMediaPath},
-		{"data-mediapicker-title",T("Insert/Update Media")},
-        {"style", "width:100%"}
+     new Dictionary<string, object> {
+        {"style", "display:none"}
 	 })
+
+<div class="html tinymce" style="width:100%" id="@Html.Id("Text")">
+    @body
+</div>
