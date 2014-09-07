@@ -1,4 +1,5 @@
 ﻿@using Orchard.ContentManagement
+@using Orchard.Environment.Descriptor.Models
 @using Orchard.InlineEditing
 @using Orchard.Core.Common.Models
 @using Orchard.Core.Common.Settings
@@ -17,13 +18,20 @@
         EditorFlavor = flavor,
         AddMediaPath = "/"
     };
+    
+    var shellDescriptor = WorkContext.Resolve<ShellDescriptor>();
 
     if (flavor == "html") {
-        Script.Require("InlineEditor_TinyMceEditor");
+        if (shellDescriptor.Features.Any(x => x.Name == "TinyMce")) {
+            Script.Require("TinyMce");
+            Script.Include("orchard-inlineedit-tinymceeditor.js");
+        }
     }
     if (flavor == "markdown") {
-        Script.Require("OrchardMarkdown");
-        Script.Include("orchard-inlineedit-markdowneditor.js");
+        if (shellDescriptor.Features.Any(x => x.Name == "Markdown")) {
+            Script.Require("OrchardMarkdown");
+            Script.Include("orchard-inlineedit-markdowneditor.js");
+        }
     }
 }
 

@@ -39,24 +39,12 @@
         //}
 
         debugger;
-        if (shapeEditor.MetadataType == "Parts_Title") {
-            var selector = "#" + shape.id + " input";
-
-            window.tinyMCE.init({
-                selector: selector,
-                theme: "modern",
-                toolbar: "undo redo",
-                menubar: false,
-                statusbar: false,
-                skin: 'orchardlightgray',
-                inline: true
-            });
-        }
         if (shapeEditor.MetadataType == "Parts_Common_Body") {
+            
             var selector = "#" + shape.id + " textarea.tinymce";
 
-            window.tinyMCE.init({
-                selector: selector,
+            // Creates a new editor instance
+            var ed = new window.tinymce.Editor(selector, {
                 theme: "modern",
                 schema: "html5",
                 plugins: "fullscreen,autoresize,searchreplace,link,charmap,code" + mediaPlugins.substr(2),
@@ -69,7 +57,13 @@
                 statusbar: false,
                 skin: 'orchardlightgray',
                 inline: true
+            }, window.tinymce.EditorManager);
+
+            ed.on('click', function (e) {
+                ed.selection.select(e.target);
             });
+
+            ed.render();
         }
         //tinyMCE.init({
         //    theme: "advanced",
