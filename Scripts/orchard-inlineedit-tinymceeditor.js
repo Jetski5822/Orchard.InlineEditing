@@ -33,8 +33,6 @@
         var mediaPlugins = ',|';
 
         if (shapeEditor.MetadataType == 'Parts_Common_Body') {
-            debugger;
-
             var selector = '#' + shape.id + ' div.tinymce';
 
             var editorShapeId = $(selector).attr('id');

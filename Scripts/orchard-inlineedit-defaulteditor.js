@@ -9,6 +9,15 @@
         console.log('Processed Content: Default Editor');
     });
 
+    $inlineedit.bind(inlineedit.events.editorPrepared, function(event, shape, shapeEditor) {
+        console.log('Finalizing Editor');
+
+        var tagName = $('.editable-content', $(shape).parent()).children().first().prop('tagName');
+        
+
+        console.log('Finalized Editor');
+    });
+
     var editor = {
         
     };

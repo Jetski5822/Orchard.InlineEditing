@@ -1,4 +1,14 @@
-﻿/*.widget-control.shape {
+﻿/*.shape-editor-wrapper #Title_Title {
+    width: 100%;
+    position: relative;
+    border: none;
+}
+
+    .shape-editor-wrapper #Title_Title:focus {
+        outline: 1px dotted #333;
+    }*/
+
+/*.widget-control.shape {
     border: none;
 	clear: both;
 }
