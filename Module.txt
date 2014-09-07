@@ -3,7 +3,7 @@ AntiForgery: enabled
 Author: Nicholas Mayne & Sipke Schoorstra
 Website: http://www.themayneissue.com
 Version: 0.0.1
-OrchardVersion: 1.8.0
+OrchardVersion: 1.x
 Description: An implementation of inline editing for Orchard CMS
 FeatureDescription: An implementation of inline editing for Orchard CMS.
 Category: Widget

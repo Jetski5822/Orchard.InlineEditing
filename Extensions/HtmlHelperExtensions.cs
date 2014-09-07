@@ -11,7 +11,7 @@ namespace Orchard.InlineEditing {
             Orchard.Mvc.ViewEngines.Razor.WebViewPage<dynamic> webViewPage) {
 
             var viewModel = (InlineViewModel)webViewPage.Model;
-
+            
             TagBuilder tagBuilder = null;
 
             Shape shape = (Shape)viewModel.DisplayShape;
