@@ -20,12 +20,12 @@
         AddMediaPath = "/"
     };
     
-    if (flavor == "html") {
+    if (flavor.Equals("html", StringComparison.InvariantCultureIgnoreCase)) {
         if (shellDescriptor.Features.Any(x => x.Name == "TinyMce")) {
             viewModel.EditorFlavor = viewModel.EditorFlavor + "__tinymce";
         }
     }
-    if (flavor == "markdown") {
+    if (flavor.Equals("markdown", StringComparison.InvariantCultureIgnoreCase)) {
         if (shellDescriptor.Features.Any(x => x.Name == "Markdown")) {
             Script.Require("OrchardMarkdown");
             Script.Include("orchard-inlineedit-markdowneditor.js");

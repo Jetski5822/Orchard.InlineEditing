@@ -18,7 +18,7 @@
     Script.Require("jQueryColorBox");
     Style.Require("jQueryColorBox");
 
-    var body = new HtmlString(((string)Model.Text).Replace(Environment.NewLine, "</p>" + Environment.NewLine + "<p>")); 
+    var body = new HtmlString((string)Model.Text);
 }
 
 @Html.TextArea("Text", (string)Model.Text, 25, 80,
