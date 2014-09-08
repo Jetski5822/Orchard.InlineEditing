@@ -154,17 +154,18 @@
 
                 $.post(urlAction, content )
                     .done(function (html) {
+                        var trimmedHtml = html.trim();
 
-                        var shapeId = $(html.trim()).data("shape-id");
-                        var shapeType = $(html.trim()).data("shape-type");
-                        var shapeName = $(html.trim()).data("shape-name");
+                        var shapeId = $(trimmedHtml).data("shape-id");
+                        var shapeType = $(trimmedHtml).data("shape-type");
+                        var shapeName = $(trimmedHtml).data("shape-name");
                         if (shapeName == undefined) {
                             $("[data-shape-id=" + shapeId + "][data-shape-type=" + shapeType + "]").replaceWith(function() {
-                                return html.trim();
+                                return trimmedHtml;
                             });
                         } else {
                             $("[data-shape-id=" + shapeId + "][data-shape-type=" + shapeType + "][data-shape-name=" + shapeName + "]").replaceWith(function () {
-                                return html.trim();
+                                return trimmedHtml;
                             });
                         }
                         // TODO: markup for new display shape

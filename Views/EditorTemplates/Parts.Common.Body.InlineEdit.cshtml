@@ -27,9 +27,6 @@
     }
     if (flavor.Equals("markdown", StringComparison.InvariantCultureIgnoreCase)) {
         if (shellDescriptor.Features.Any(x => x.Name == "Markdown")) {
-            Script.Require("OrchardMarkdown");
-            Script.Include("orchard-inlineedit-markdowneditor.js");
-
             viewModel.EditorFlavor = viewModel.EditorFlavor + "__markdown";
         }
     }
