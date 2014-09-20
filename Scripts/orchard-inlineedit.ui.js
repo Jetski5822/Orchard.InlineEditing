@@ -159,7 +159,7 @@
                         var shapeId = $(trimmedHtml).data("shape-id");
                         var shapeType = $(trimmedHtml).data("shape-type");
                         var shapeName = $(trimmedHtml).data("shape-name");
-                        if (shapeName == undefined) {
+                        if (shapeName === undefined) {
                             $("[data-shape-id=" + shapeId + "][data-shape-type=" + shapeType + "]").replaceWith(function() {
                                 return trimmedHtml;
                             });
