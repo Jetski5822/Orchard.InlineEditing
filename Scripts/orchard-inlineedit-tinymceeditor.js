@@ -5,11 +5,16 @@
 
     $inlineedit.bind(inlineedit.events.retrieveContent, function (event, scope, shapeEditor) {
         console.log('Processing Content: TinyMce Editor');
-
+        
         if (tinymce != undefined) {
             console.log('Processing Content: TinyMce Editor triggering save');
-            var afterContent = tinymce.activeEditor.save();
-            $('#' + tinymce.activeEditor.id).parent('form').children('textarea').val(afterContent);
+            var activatedEditorId = $('#' + shapeEditor.attr("id") + ' div.tinymce').attr("id");
+            var activatedEditor = tinymce.editors[activatedEditorId];
+
+            if (activatedEditor.isDirty()) {
+                var afterContent = activatedEditor.save();
+                $('#' + activatedEditorId).parent('form').children('textarea').val(afterContent);
+            }
 
             console.log('Processing Content: TinyMce Editor triggering saved');
         }
